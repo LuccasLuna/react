@@ -1,4 +1,4 @@
-# titulo
+# anotação
 
 ação -> reducer -> newState
 

@@ -5,15 +5,15 @@ import { Title, Paragrafo } from './styled';
 
 import axios from '../../services/axios';
 
+import * as exampleActions from '../../store/modules/examples/actions';
+
 export default function Login() {
   const dispatch = useDispatch();
 
   function handleClick(e) {
     e.preventDefault();
 
-    dispatch({
-      type: 'BOTAO_CLICADO',
-    });
+    dispatch(exampleActions.clicaBotaoRequest());
   }
 
   React.useEffect(() => {

@@ -9,7 +9,8 @@ export default function Header() {
   // useSelector ta pegando o estado do botaoClicado
   // useSelector esta em um estado global, ele pega o evento de tudo que esta no objeto state
 
-  const botaoClicado = useSelector((state) => state.botaoClicado); // botaoClicado esta em um objeto do state
+  // botaoClicado esta em um objeto example que esta dentro do state
+  const botaoClicado = useSelector((state) => state.example.botaoClicado);
   return (
     <Nav>
       <Link to='/'>

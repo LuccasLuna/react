@@ -1,27 +1,21 @@
-import { createStore } from 'redux';
+import { persistStore } from 'redux-persist';
 
-// define o estado inicial do botao
-const initialState = {
-  botaoClicado: false,
-};
+import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 
-// state ta recebendo o objeto initialState
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'BOTAO_CLICADO': {
-      // newState ta recebendo o objeto do state(JAMAIS manipular o state diretamente)
-      const newState = { ...state };
-      // newState recebe o estado oposto(caso o valor de newState é false, ele ira receber true)
-      newState.botaoClicado = !newState.botaoClicado;
+import persistedReducer from './modules/reduxPersist';
 
-      return newState; // return o novo estado de newState
-    }
+import rootReducer from './modules/rootReducer';
+import rootSaga from './modules/rootSaga';
 
-    default:
-      return state;
-  }
-};
+const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(reducer);
+const store = createStore(
+  persistedReducer(rootReducer),
+  applyMiddleware(sagaMiddleware)
+);
 
+sagaMiddleware.run(rootSaga);
+
+export const persistor = persistStore(store);
 export default store;
